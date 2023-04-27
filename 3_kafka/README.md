@@ -1,6 +1,11 @@
-### Prerequisites
-Install conda, docker and confluent-kafka:
+### Setup Kafka
+Connect to your VM compute instance as in [2-terraform-gcp-readme.md]() and clone project in VM
 ```
+git clone https://github.com/dannhh/retail-sales.git
+```
+Move to folder 3_kafka and install conda, docker and confluent-kafka:
+```
+chmod +x docker-conda.sh
 ./docker-conda.sh
 ```
 The role of these component:
@@ -9,8 +14,8 @@ The role of these component:
 - Docker is used to create lightweight, isolated environments for running Kafka or other services. Kafka can be run inside a Docker container, which makes it easy to deploy and manage Kafka instances in a variety of environments.
 
 - Confluent Kafka is a distribution of Apache Kafka that includes additional tools and features for managing Kafka clusters such as a web-based UI for managing Kafka clusters, connectors for integrating Kafka with other systems, and additional security features.
-### Setup Kafka
-Start kafka instance:
+
+Type `exit` to close session, then connect again and start kafka instance:
 ```
 export KAFKA_ADDRESS=<external ip address of kafka-instance vm> 
 export KAFKA_ADDRESS=35.201.188.31

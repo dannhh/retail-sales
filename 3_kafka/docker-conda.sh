@@ -3,8 +3,8 @@
 # Run using the below command
 # bash docker_conda.sh
 
-# echo "Downloading anaconda..."
-# wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh
+echo "Downloading anaconda..."
+wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh
 
 echo "Running anaconda script..."
 bash Anaconda3-2023.03-Linux-x86_64.sh -b -p ~/anaconda
@@ -55,5 +55,5 @@ docker-compose --version
 
 mkdir -p ~/.google/credentials
 
-# Confluent Kafka provides additional technologies that sit on top of Apache Kafka
-pip install confluent-kafka
+# Kafka provides additional technologies that sit on top of Apache Kafka
+pip install kafka

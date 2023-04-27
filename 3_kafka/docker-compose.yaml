@@ -33,6 +33,7 @@ services:
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: "true"
       CONFLUENT_SUPPORT_CUSTOMER_ID: "anonymous"
+  
   kafka-tools:
     image: confluentinc/cp-kafka:5.4.0
     hostname: kafka-tools
