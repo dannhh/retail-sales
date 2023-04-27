@@ -55,5 +55,5 @@ docker-compose --version
 
 mkdir -p ~/.google/credentials
 
-# Kafka provides additional technologies that sit on top of Apache Kafka
-pip install kafka
+# kafka-python
+pip install kafka-python
