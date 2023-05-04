@@ -16,7 +16,7 @@ from pyspark.sql.types import (IntegerType,
 
 schema = {
     # 'customer_shopping_data': StructType([
-    'customer_shopping_data.json': StructType([
+    'customer_shopping_data': StructType([
         StructField("invoice_no", StringType(), True),
         StructField("customer_id", StringType(), True),
         StructField("gender", StringType(), True),

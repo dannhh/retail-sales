@@ -8,7 +8,7 @@ from functions import *
 from schema import schema
 
 # Kafka Topics
-LISTEN_EVENTS_TOPIC = "customer_shopping_data.json"
+LISTEN_EVENTS_TOPIC = "customer_shopping_data"
 # LISTEN_EVENTS_TOPIC = "customer_shopping_data"
 
 KAFKA_PORT = "9092"

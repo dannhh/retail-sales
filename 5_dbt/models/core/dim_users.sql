@@ -1,16 +1,16 @@
-{ { config(materialized = 'table') } } 
+{{ config(materialized = 'table') }} 
 
 -- age column in the users dimension is considered to be a SCD2 change. Just for the purpose of learning to write SCD2 change queries. 
 -- The below query is constructed to accommodate changing ages from free to paid and maintaining the latest state of the user along with
 -- historical record of the user's age
 
 SELECT
-    { { dbt_utils.surrogate_key(['customerId', 'rowActivationDate', 'age']) } } as userKey,
+    {{ dbt_utils.surrogate_key(['customerId', 'rowActivationDate', 'age']) }} as userKey,
     *
 FROM
 (
     SELECT
-        CAST(customerId AS BIGINT) as customerId,
+        SAFE_CAST(REGEXP_REPLACE(customerId, '[^0-9 ]','') AS BIGINT) as customerId,
         gender,
         age,
         minDate as rowActivationDate,
@@ -41,7 +41,7 @@ FROM
             -- Lag the age and see where the user changes age from free to paid or otherwise
             (
                 SELECT *,
-                    CASE WHEN LAG(age, 1, 'NA') OVER (
+                    CASE WHEN LAG(age, 1, -1) OVER (
                             PARTITION BY customerId, gender
                             ORDER BY date
                         ) <> age THEN 1
@@ -51,7 +51,7 @@ FROM
                 -- Select distinct state of user in each timestamp
                 (
                     SELECT DISTINCT customer_id AS customerId, gender, age, invoice_date AS date
-                    FROM { { source('staging', 'customer_shopping_data.json') } }
+                    FROM {{ source('staging', 'customer_shopping_data') }}
                     WHERE customer_id <> 'NA'
                 )
             )
@@ -60,17 +60,17 @@ FROM
     )
     UNION ALL
     SELECT
-        CAST(customer_id as BIGINT) as userKey,
+        SAFE_CAST(REGEXP_REPLACE(customer_id, '[^0-9 ]','') AS BIGINT) as userKey,
         gender,
         age,
-        CAST(min(ts) as date) as rowActivationDate,
+        CAST(min(invoice_date) as date) as rowActivationDate,
         DATE '9999-12-31' as rowExpirationDate,
         1 as currentRow
-    FROM { { source('staging', 'customer_shopping_data.json') } }
+    FROM {{ source('staging', 'customer_shopping_data') }}
     WHERE
         customer_id = 'NA'
     GROUP BY
         customer_id,
         gender,
-        age,
+        age
 )

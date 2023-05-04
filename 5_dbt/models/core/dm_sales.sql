@@ -19,7 +19,7 @@ SELECT
 
     dim_users.gender AS gender,
     dim_users.age AS level,
-    dim_users.userId as userId,
+    dim_users.customerId as customerId,
     dim_users.currentRow as currentUserRow,
 
     dim_datetime.date AS dateHour,

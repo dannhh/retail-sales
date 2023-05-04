@@ -28,13 +28,18 @@ This course is mainly built on the background of GCP. Follow the [course's GCP g
 
 ### Step 2: Setup infrastructure - terraform
 Check out course's terraform guideline for more information.
-Check out [2_terraform-README.md]() for the setting of this project. 
+Check out [2_terraform-README.md](https://github.com/dannhh/retail-sales/blob/main/2_terraform_gcp/README.md) for the setting of this project. 
 
 ### Step 3: Start Kafka
+Check out [3_kafka-README.md](https://github.com/dannhh/retail-sales/blob/main/3_kafka/README.md)
 
 ### Step 4: Spark streaming
+Check out [4_spark_streaming-README.md](https://github.com/dannhh/retail-sales/blob/main/4_spark_streaming/README.md)
 
-### Step 5: 
+### Step 5: Airflow and DBT
+Check out [6_airflow_streaming-README.md](https://github.com/dannhh/retail-sales/blob/main/6_airflow/README.md)
+
+CONTINUE UPDATING !!!
 
 
 ## References

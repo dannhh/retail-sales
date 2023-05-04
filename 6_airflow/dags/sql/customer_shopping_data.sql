@@ -1,4 +1,4 @@
-INSERT {{ BIGQUERY_DATASET }}.{{ RAW_DATA_TABLE }}
+INSERT {{ BIGQUERY_DATASET }}.{{ CUSTOMER_SHOPPING_DATA_TABLE }}
 SELECT
     COALESCE(invoice_no, 'NA') AS invoice_no,
     COALESCE(customer_id, 'NA') AS customer_id,
@@ -11,5 +11,5 @@ SELECT
     invoice_date AS invoice_date,
     COALESCE(shopping_mall, 'NA') AS shopping_mall,
 
-FROM {{ BIGQUERY_DATASET }}.{{ RAW_DATA_TABLE}}_{{ logical_date.strftime("%m%d%H") }} -- Creates a table name with month day and hour values appended to it
+FROM {{ BIGQUERY_DATASET }}.{{ CUSTOMER_SHOPPING_DATA_TABLE}}_{{ logical_date.strftime("%m%d%H") }} -- Creates a table name with month day and hour values appended to it
                                                                                       -- like customer_shopping_data.json_032313 for 23-03-2022 13:00:00

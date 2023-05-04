@@ -10,7 +10,7 @@ from task_templates import (create_external_table,
                             insert_job, 
                             delete_external_table)
 
-EVENTS = ['customer_shopping_data.json'] # we have data coming in from one events
+EVENTS = ['customer_shopping_data'] # we have data coming in from one events
 
 GCP_PROJECT_ID = os.environ.get('GCP_PROJECT_ID')
 GCP_GCS_BUCKET = os.environ.get('GCP_GCS_BUCKET')
@@ -47,12 +47,12 @@ with DAG(
     
     initate_dbt_task = BashOperator(
        task_id = 'dbt_initiate',
-       bash_command = 'cd /5_dbt && dbt deps && dbt run --profiles-dir . --target prod'
+       bash_command = 'cd /dbt && dbt deps && dbt run --profiles-dir . --target prod'
     )
 
     execute_dbt_task = BashOperator(
        task_id = 'dbt_retail_sales_run',
-       bash_command = 'cd /5_dbt && dbt deps && dbt run --profiles-dir . --target prod'
+       bash_command = 'cd /dbt && dbt deps && dbt run --profiles-dir . --target prod'
     ) 
 
     for event in EVENTS:
@@ -60,7 +60,7 @@ with DAG(
         staging_table_name = event
         insert_query = f"{{% include 'sql/{event}.sql' %}}" #extra {} for f-strings escape
         external_table_name = f'{staging_table_name}_{EXECUTION_DATETIME_STR}'
-        events_data_path = f'{staging_table_name}/month={EXECUTION_MONTH}/day={EXECUTION_DAY}/hour={EXECUTION_HOUR}'
+        events_data_path = f'{staging_table_name}/invoice_month={EXECUTION_MONTH}/invoice_day={EXECUTION_DAY}'
         events_schema = schema[event]
 
         create_external_table_task = create_external_table(event,

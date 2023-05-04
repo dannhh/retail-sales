@@ -5,4 +5,4 @@ sources:
     database: "{{ env_var('GCP_PROJECT_ID') }}"
     schema: stg
     tables:
-      - name: customer_shopping_data.json
+      - name: customer_shopping_data
