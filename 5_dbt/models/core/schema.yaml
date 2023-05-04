@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: staging
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: stg
+    tables:
+      - name: customer_shopping_data.json
