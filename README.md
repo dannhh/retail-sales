@@ -62,3 +62,5 @@ CONTINUE UPDATING !!!
 Link dashboard: [Retail Sale Dashboard](https://lookerstudio.google.com/reporting/8cb34a16-854d-43d6-a1f6-d402c1499230)
 
 ## References
+- https://github.com/sadiayousafzai036/FinalProject
+- https://github.com/ankurchavda/streamify
